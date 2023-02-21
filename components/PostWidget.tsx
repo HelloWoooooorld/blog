@@ -4,10 +4,11 @@ import Link from "next/link";
 import { getRecentPosts, getSimilarPosts } from "../services";
 import Image from 'next/image';
 
-import { grpahCMSImageLoader } from '../until';
+import { graphCMSImageLoader } from '../until';
+import { IFeaturedPosts, IPostWidget } from "../interfaces/post";
 
-const PostWidget = ({ categories, slug }: any) => {
-  const [relatedPosts, setRelatedPosts] = useState<any>([]);
+const PostWidget = ({ categories, slug }: IPostWidget) => {
+  const [relatedPosts, setRelatedPosts] = useState<IFeaturedPosts[]>([]);
 
   useEffect(() => {
     if (slug) {
@@ -29,11 +30,11 @@ const PostWidget = ({ categories, slug }: any) => {
       >
         {slug ? "Related Posts" : "Recent Posts"}
       </h3>
-      {relatedPosts.map((post: any) => (
+      {relatedPosts.map((post: IFeaturedPosts) => (
         <div key={post?.title} className="flex items-center w-full mb-4">
           <div className=" w-16 flex-none">
             <Image
-              loader={grpahCMSImageLoader}
+              loader={graphCMSImageLoader}
               alt={post.title}
               width={60}
               height={60}

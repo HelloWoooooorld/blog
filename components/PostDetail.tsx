@@ -1,13 +1,29 @@
 import React, { ReactElement } from "react";
 
 import moment from "moment";
-import { IPosts } from "../interfaces/post";
+import { IPostCard } from "../interfaces/post";
 
-const PostDetail = ({ post }: IPosts & any) => {
+interface IChildren {
+  text: string;
+}
+
+type ObjectType = {
+  bold: string;
+  italic: string;
+  underline: string;
+  height: string;
+  width: string;
+  title: string;
+  src: string;
+  type: string;
+  children: IChildren[];
+};
+
+const PostDetail = ({ post }: IPostCard) => {
   const getContentFragment = (
     index: string,
     text: string,
-    obj: any,
+    obj: ObjectType,
     type?: string
   ) => {
     let modifiedText: JSX.Element | string = text;
@@ -26,6 +42,7 @@ const PostDetail = ({ post }: IPosts & any) => {
       }
     }
 
+
     switch (type) {
       case "heading-three":
         return (
@@ -33,7 +50,7 @@ const PostDetail = ({ post }: IPosts & any) => {
             {(modifiedText as any).map(
               (
                 item: React.ReactElement<
-                  any,
+                  string,
                   string | React.JSXElementConstructor<any>
                 >,
 
@@ -50,7 +67,7 @@ const PostDetail = ({ post }: IPosts & any) => {
             {(modifiedText as any).map(
               (
                 item: React.ReactElement<
-                  any,
+                  string,
                   string | React.JSXElementConstructor<any>
                 >,
                 i: React.Key
@@ -128,13 +145,21 @@ const PostDetail = ({ post }: IPosts & any) => {
             </div>
           </div>
           <h1 className="mb-8 text-3xl font-semibold">{post.post.title}</h1>
-          {post.post.content.raw.children.map((typeObj: any, index: any) => {
-            const children = typeObj.children.map((item: any, itemindex: any) =>
-              getContentFragment(itemindex, item.text, item)
-            );
+          {post.post.content.raw.children.map(
+            (typeObj: ObjectType, index: string) => {
+              const children = typeObj.children.map(
+                (item: any, itemindex: any) =>
+                  getContentFragment(itemindex, item.text, item)
+              );
 
-            return getContentFragment(index, children, typeObj, typeObj.type);
-          })}
+              return getContentFragment(
+                index,
+                children as unknown as string,
+                typeObj,
+                typeObj.type
+              );
+            }
+          )}
         </div>
       </div>
     </>

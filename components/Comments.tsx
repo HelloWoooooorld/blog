@@ -4,14 +4,8 @@ import { IPostsShort } from "../interfaces/post";
 import parse from "html-react-parser";
 import { getComments } from "../services";
 
-interface IComment {
-  name: string;
-  createdAt: string;
-  comment: string;
-}
-
 const Comments = ({ slug }: IPostsShort) => {
-  const [comments, setComments] = useState<IComment[]>([]);
+  const [comments, setComments] = useState<ICommentShort[]>([]);
 
   useEffect(() => {
     getComments(slug).then((comments) => setComments(comments));
@@ -25,7 +19,7 @@ const Comments = ({ slug }: IPostsShort) => {
             {comments.length}
             Comments
           </h3>
-          {comments.map((comment: IComment) => (
+          {comments.map((comment: ICommentShort) => (
             <div key={comment.createdAt} className="border-b border-gray-100 mb-4 pb-4">
               <p className="mb-4">
                 <span className="font-semibold">{comment.name}</span>

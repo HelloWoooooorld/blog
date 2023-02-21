@@ -8,5 +8,11 @@ type CommentType = {
     name: string | null;
     email: string | null;
     comment?: string | null;
-    storeData: null | any;
+    storeData: null | unknown;
+  }
+
+  interface ICommentShort {
+    name: string;
+    createdAt: string;
+    comment: string;
   }

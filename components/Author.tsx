@@ -1,9 +1,9 @@
 import React from "react";
-import { IAuthor } from "../interfaces/post";
+import { AuthorType, IAuthor } from "../interfaces/post";
 import Image from "next/image";
-import { grpahCMSImageLoader } from "../until";
+import { graphCMSImageLoader } from "../until";
 
-const Author = (author: IAuthor & any): JSX.Element => {
+const Author = (author: AuthorType): JSX.Element => {
   const { bio, name, photo } = author?.author;
 
   return (
@@ -11,7 +11,7 @@ const Author = (author: IAuthor & any): JSX.Element => {
       <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
         <Image
           unoptimized
-          loader={grpahCMSImageLoader}
+          loader={graphCMSImageLoader}
           alt={name}
           height="140"
           width="140"

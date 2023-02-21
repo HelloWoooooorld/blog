@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { categories } from "../mock/categoriesMock";
-import { HeaderProps } from "../interfaces/header";
 import { getCategories } from "../services";
 import { Category } from "../interfaces/post";
 

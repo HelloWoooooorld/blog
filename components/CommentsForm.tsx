@@ -27,10 +27,10 @@ const CommentsForm = ({ slug }: IPostsShort) => {
       },
     }
   );
-  const commentEl = useRef<HTMLTextAreaElement>(null);
-  const nameEl = useRef<HTMLInputElement>(null);
-  const emailEl = useRef<HTMLInputElement>(null);
-  const storeDataEl = useRef<HTMLInputElement>(null);
+  const commentEl = useRef<HTMLTextAreaElement & string>(null);
+  const nameEl = useRef<HTMLInputElement & string>(null);
+  const emailEl = useRef<HTMLInputElement & string>(null);
+  const storeDataEl = useRef<HTMLInputElement & string>(null);
 
   useEffect(() => {
     setState({

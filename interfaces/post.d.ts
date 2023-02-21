@@ -1,13 +1,22 @@
 export type IPostCard = {
-  node?: IPosts;
+  post: IPosts;
   key?: string;
 };
 
+export type MainPostType = {
+  cursor: string;
+  posts: IPosts;
+};
+
 export interface IPosts {
+  post: any;
   map?: any;
-  key:? string;
+  key: ?string;
   author: IAuthor;
   createdAt: string;
+  node: {
+    slug;
+  };
   slug: string;
   title: string;
   excerpt: string;
@@ -15,11 +24,23 @@ export interface IPosts {
   categories: Category[];
 }
 
+export interface IFeaturedPosts {
+  title: string;
+  featuredImage: {
+    url: string;
+  };
+  createdAt: string;
+  slug: string;
+}
+
 export interface IPostsShort {
   slug?: string;
   name?: string;
 }
 
+export type AuthorType = {
+  author: IAuthor;
+};
 export interface IAuthor {
   bio: string;
   name: string;
@@ -40,7 +61,6 @@ export interface Category {
   slug: string;
 }
 
-
 export interface IAuthor {
   name: string;
   photo: {
@@ -53,9 +73,19 @@ export interface IPost {
     author: IAuthor;
     slug: string;
     featuredImage: {
-        url: string
+      url: string;
     };
     createdAt: string;
     title: string;
   };
+}
+
+interface IPostWidget {
+  categories: string;
+  slug: string;
+}
+
+
+interface IParams extends ParsedUrlQuery {
+  slug: string
 }

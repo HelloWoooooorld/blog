@@ -9,13 +9,14 @@ import {
   CommentsForm,
   Loader,
 } from "../../components";
-import { Category } from "../../interfaces/post";
+import { Category, IParams } from "../../interfaces/post";
 import { useRouter } from "next/router";
+import { GetStaticProps } from "next";
 
 const PostDetails = (post: any) => {
-  const router = useRouter()
-  if(router.isFallback) {
-    return <Loader />
+  const router = useRouter();
+  if (router.isFallback) {
+    return <Loader />;
   }
   return (
     <div className="container mx-auto px-10 mb-8">
@@ -30,7 +31,7 @@ const PostDetails = (post: any) => {
           <div className="relative lg:sticky top-8">
             <PostWidget
               slug={post.post.slug}
-              categories={(post.categories ?? []).map(
+              categories={(post.post.categories ?? []).map(
                 (category: Category) => category.slug
               )}
             />
@@ -42,14 +43,16 @@ const PostDetails = (post: any) => {
   );
 };
 
-export async function getStaticProps({ params }: any) {
-  const { slug } = params;
+export const getStaticProps: GetStaticProps = async (context) => {
+  const { slug } = context.params as unknown as IParams;
+
   const data = (await getPostDetails(slug)) || [];
 
   return {
     props: { post: data },
   };
-}
+};
+
 
 export async function getStaticPaths() {
   const posts = await getPosts();
