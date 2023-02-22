@@ -6,6 +6,7 @@ import FeaturedPosts from "../section/FeaturedPosts";
 import { IPosts, MainPostType } from "../interfaces/post";
 
 const Home = ({ posts }: MainPostType) => {
+  console.log(posts, 'from home')
   return (
     <div className="container mx-auto px-10 ">
       <Head>

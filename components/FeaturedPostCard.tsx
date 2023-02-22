@@ -5,6 +5,7 @@ import Link from "next/link";
 import { IPost } from "../interfaces/post";
 
 const FeaturedPostCard = ({ post }: IPost) => {
+
   return (
     <div className="relative h-72">
       <div

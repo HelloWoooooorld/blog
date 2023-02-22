@@ -2,9 +2,7 @@ import React, { useState, useEffect } from "react";
 import moment from "moment";
 import Link from "next/link";
 import { getRecentPosts, getSimilarPosts } from "../services";
-import Image from 'next/image';
-
-import { graphCMSImageLoader } from '../until';
+import Image from "next/image";
 import { IFeaturedPosts, IPostWidget } from "../interfaces/post";
 
 const PostWidget = ({ categories, slug }: IPostWidget) => {
@@ -33,15 +31,15 @@ const PostWidget = ({ categories, slug }: IPostWidget) => {
       {relatedPosts.map((post: IFeaturedPosts) => (
         <div key={post?.title} className="flex items-center w-full mb-4">
           <div className=" w-16 flex-none">
-            <Image
-              loader={graphCMSImageLoader}
-              alt={post.title}
-              width={60}
-              height={60}
-              unoptimized
-              className="align-middle rounded-full"
-              src={post.featuredImage.url}
-            />
+            {post.featuredImage && (
+              <img
+                className="align-middle rounded-full"
+                src={post.featuredImage?.url}
+                alt={post.title}
+                width={500}
+                height={500}
+              />
+            )}
           </div>
           <div className="flex-grow ml-4">
             <p className="text-gray-500 font-xs">

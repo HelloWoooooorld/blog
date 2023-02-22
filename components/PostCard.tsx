@@ -2,14 +2,19 @@ import React from "react";
 import moment from "moment";
 import Link from "next/link";
 import { IPostCard } from "../interfaces/post";
+import Image from "next/image";
+import graphCMSImageLoader from "../until";
 
 const PostCard = ({ post }: IPostCard) => {
   return (
     <div className="bg-white shadow-lg rounded-lg p-0 lg:p-8 pb-12 mb-8">
       <div className="relative overflow-hidden shadow-md pb-80 mb-6">
-        <img
-          src={post.featuredImage.url}
+        <Image
+          src={post.featuredImage?.url}
           alt={post.slug}
+          loader={graphCMSImageLoader}
+          width={200}
+          height={300}
           className="object-top absolute h-80 w-full object-cover shadow-lg rounded-t-lg lg:rounded-lg"
         />
       </div>
@@ -18,10 +23,11 @@ const PostCard = ({ post }: IPostCard) => {
       </h1>
       <div className="bloc lg:flex text-center item-center justify-center mb-8 w-full">
         <div className="flex item-center justify-center mb-4 lg:m">
-          <img
+          <Image
             alt={post.author.name}
-            height={"30px"}
-            width={"30px"}
+            height={30}
+            width={30}
+            loader={graphCMSImageLoader}
             className="align-middle rounded-full"
             src={
               post.author.photo
